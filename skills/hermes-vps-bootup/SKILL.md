@@ -36,9 +36,32 @@ curl -sS -H "X-API-Key: $KEY" https://cos-mesh-v2.jkausel.workers.dev/inbox | he
 
 ---
 
+## STEP 1.5 — CANON REFRESH (pull master registry from GitHub)
+
+Canonical source is the `cos-mesh-canon` repo. Pull fresh `nodes.json` every bootup:
+
+```bash
+curl -sS --max-time 10 \
+  https://raw.githubusercontent.com/jkausel-ai/cos-mesh-canon/main/nodes.json \
+  > /tmp/cos-mesh-nodes.json
+
+python3 <<'PY'
+import json
+d = json.load(open('/tmp/cos-mesh-nodes.json'))
+assert d['schema_version'] == 'cos-mesh-canon.v1', "SCHEMA MISMATCH — alert em1"
+assert any(n['node_id'] == 'hermes' for n in d['nodes']), "hermes NOT in registry — alert em1"
+print(f"Canon OK — {d['total_nodes']} nodes, worker={d['worker_url']}")
+PY
+```
+
+If refresh fails (network/GitHub unreachable), continue with cached state but log `canon_refresh=DEGRADED` in rollcall body.
+
+---
+
 ## STEP 2 — TOPOLOGY v2 ASSERTION (CRITICAL — canon, non-negotiable)
 
-You MUST load and internalize the following before any routing action. These facts are canon per `EquiVest Properties/docs/mesh/COS-MESH-TOPOLOGY-v2.md`.
+You MUST load and internalize the following before any routing action. These facts are canon per the master registry at:
+https://raw.githubusercontent.com/jkausel-ai/cos-mesh-canon/main/COS-MESH-TOPOLOGY-v2.md
 
 **Two-Layer Topology:**
 

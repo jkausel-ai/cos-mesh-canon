@@ -70,6 +70,41 @@ chmod 600 ~/.claudeos/secrets/cos-mesh-credentials.json
 Test: `curl -sS -H "X-API-Key: 6d325d8c-ad76-4bc6-b3c5-7138942330ad" https://cos-mesh-v2.jkausel.workers.dev/inbox | head -c 200`
 Should return JSON, not "AUTH_INVALID". If AUTH_INVALID, STOP and notify Justin.
 
+## STEP 1.5 — CANON REFRESH (pull master registry from GitHub)
+
+Every bootup pulls canonical topology from the `cos-mesh-canon` repo so stale local copies don't cause routing drift.
+
+```bash
+curl -sS --max-time 10 \
+  https://raw.githubusercontent.com/jkausel-ai/cos-mesh-canon/main/nodes.json \
+  > /tmp/cos-mesh-nodes.json
+
+# Verify canon pulled + own node is in registry
+python3 <<'PY'
+import json
+d = json.load(open('/tmp/cos-mesh-nodes.json'))
+print(f"Canon schema: {d['schema_version']}")
+print(f"Total nodes:  {d['total_nodes']}")
+print(f"Worker:       {d['worker_url']}")
+my_id = open('/Users/justinkausel/.claudeos/federation/my-node-id.txt').read().strip() if __import__('os').path.exists('/Users/justinkausel/.claudeos/federation/my-node-id.txt') else 'jmbp'
+hits = [n for n in d['nodes'] if n['node_id'] == my_id]
+if hits:
+    n = hits[0]
+    print(f"I am: {n['node_id']} ({n['callsign']}) — {n['authority']} — layer: {n['layer']}")
+else:
+    print(f"⚠ WARNING: my node_id not found in canonical registry. Alert em1.")
+PY
+```
+
+**Routing rule reminders (from canon):**
+- All agent status / heartbeat / consensus → `em1` (CONDUCTOR)
+- Marketing approvals → `cmo`
+- Build/infra work → `codex-hermes-oncall`
+- Nuovo spokes (jmbp, jnmbp) MUST NOT route to `macmini`
+- Machine-to-machine is FORBIDDEN — always via `em1`
+
+Full master registry: https://raw.githubusercontent.com/jkausel-ai/cos-mesh-canon/main/COS-MESH-TOPOLOGY-v2.md
+
 ## STEP 2 — UHDD + CALLSIGN (deterministic, reproducible)
 
 ```bash

@@ -49,6 +49,23 @@ AUTH_TEST=$(curl -sS -o /tmp/hermes-auth.json -w '%{http_code}' \
 [[ "$AUTH_TEST" == "200" ]] || fail "mesh auth failed (HTTP $AUTH_TEST)"
 log "STEP 1 ✓ credential + mesh auth OK (node=$NODE_ID)"
 
+# ───── STEP 1.5: CANON REFRESH from GitHub (v1.1.0+) ─────
+CANON_URL="https://raw.githubusercontent.com/jkausel-ai/cos-mesh-canon/main/nodes.json"
+CANON_FILE="/tmp/cos-mesh-nodes.json"
+set +o pipefail
+if curl -sS --max-time 10 "$CANON_URL" -o "$CANON_FILE" 2>/dev/null; then
+  CANON_VER=$(python3 -c "import json; print(json.load(open('$CANON_FILE'))['schema_version'])" 2>/dev/null || echo "parse_err")
+  CANON_COUNT=$(python3 -c "import json; print(json.load(open('$CANON_FILE'))['total_nodes'])" 2>/dev/null || echo 0)
+  SELF_IN_CANON=$(python3 -c "import json; d=json.load(open('$CANON_FILE')); print('yes' if any(n['node_id']=='$NODE_ID' for n in d['nodes']) else 'NO')" 2>/dev/null || echo "err")
+  log "STEP 1.5 ✓ canon refreshed from GH (schema=$CANON_VER, $CANON_COUNT nodes, self_in_canon=$SELF_IN_CANON)"
+  if [ "$SELF_IN_CANON" != "yes" ]; then
+    log "         ⚠ WARNING: node_id=$NODE_ID NOT FOUND in canonical registry — possible drift, alert em1"
+  fi
+else
+  log "STEP 1.5 ⚠ canon refresh failed (network/GitHub unreachable) — continuing with local/cached state"
+fi
+set -o pipefail
+
 # ───── STEP 2: TOPOLOGY v2 ASSERTION (log canon) ─────
 log "STEP 2 ✓ topology v2 canon:"
 log "        Layer 1 INFRA:  hub, macmini, j-spoke, jmbp"
