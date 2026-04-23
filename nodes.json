@@ -1,6 +1,6 @@
 {
   "schema_version": "cos-mesh-canon.v1",
-  "generated_at": "2026-04-23T20:58:47Z",
+  "generated_at": "2026-04-23T23:25:03Z",
   "worker_url": "https://cos-mesh-v2.jkausel.workers.dev",
   "authority_hierarchy": [
     {
@@ -10,16 +10,30 @@
     },
     {
       "tier": 1,
-      "role": "CONDUCTOR",
-      "holder": "em1"
+      "role": "CMO",
+      "holder": "cmo",
+      "scope": "marketing strategy/approval/legal/visual"
     },
     {
       "tier": 2,
-      "role": "EXECUTOR",
-      "holder": "hermes"
+      "role": "COORDINATOR",
+      "holder": "hermes (CMO Coordinator role)",
+      "scope": "marketing dispatch/verification"
     },
     {
       "tier": 3,
+      "role": "CONDUCTOR",
+      "holder": "em1",
+      "scope": "consensus, cross-domain coordination"
+    },
+    {
+      "tier": 4,
+      "role": "EXECUTOR",
+      "holder": "hermes",
+      "scope": "runtime, pipeline"
+    },
+    {
+      "tier": 5,
       "role": "BUILDER",
       "holder": [
         "codex-hermes-oncall",
@@ -28,9 +42,12 @@
       ]
     },
     {
-      "tier": 4,
-      "role": "CMO",
-      "holder": "cmo"
+      "tier": 6,
+      "role": "MAOS-OPERATOR",
+      "holder": [
+        "sevp-jspoke"
+      ],
+      "scope": "MAOS desk-specific personas"
     },
     {
       "tier": 99,
@@ -48,6 +65,7 @@
     "all_agent_status_heartbeat_consensus": "em1",
     "marketing_approvals": "cmo",
     "build_and_infra_work": "codex-hermes-oncall",
+    "maos_sales_enablement_dispatch": "sevp-jspoke via hermes CMO Coordinator",
     "machine_to_machine": "FORBIDDEN - route via em1",
     "nuovo_spokes_may_NOT_route_to": [
       "macmini",
@@ -55,7 +73,7 @@
       "other-nuovo"
     ]
   },
-  "total_nodes": 11,
+  "total_nodes": 12,
   "active_nodes": [
     "cmo",
     "codex-cochalet-app",
@@ -66,7 +84,8 @@
     "hub",
     "jmbp",
     "jnmbp",
-    "macmini"
+    "macmini",
+    "sevp-jspoke"
   ],
   "nodes": [
     {
@@ -78,7 +97,7 @@
       "deprecated": false,
       "mesh_status": "DEAD",
       "registered_at": "2026-04-23T15:58:35.366Z",
-      "last_hb": null,
+      "last_hb": "2026-04-23T22:12:33.828Z",
       "notes": null
     },
     {
@@ -102,7 +121,7 @@
       "deprecated": false,
       "mesh_status": "ACTIVE",
       "registered_at": "2026-04-23T15:58:48.964Z",
-      "last_hb": "2026-04-23T20:58:21.794Z",
+      "last_hb": "2026-04-23T23:23:43.400Z",
       "notes": null
     },
     {
@@ -112,7 +131,7 @@
       "layer": "Layer 2",
       "authority": "BUILDER",
       "deprecated": false,
-      "mesh_status": "STALE",
+      "mesh_status": "DEAD",
       "registered_at": "2026-04-23T20:41:16.009Z",
       "last_hb": null,
       "notes": null
@@ -138,7 +157,7 @@
       "deprecated": false,
       "mesh_status": "ACTIVE",
       "registered_at": "2026-04-22T02:48:23.561Z",
-      "last_hb": "2026-04-23T20:55:02.087Z",
+      "last_hb": "2026-04-23T23:25:01.879Z",
       "notes": null
     },
     {
@@ -184,9 +203,9 @@
       "layer": "Layer 1",
       "authority": "NUOVO-SPOKE",
       "deprecated": false,
-      "mesh_status": "STALE",
+      "mesh_status": "DEAD",
       "registered_at": "2026-04-23T20:19:32.354Z",
-      "last_hb": null,
+      "last_hb": "2026-04-23T22:08:09.523Z",
       "notes": null
     },
     {
@@ -198,8 +217,20 @@
       "deprecated": false,
       "mesh_status": "ACTIVE",
       "registered_at": "2026-03-26T03:49:25.621Z",
-      "last_hb": "2026-04-23T20:56:16.841Z",
+      "last_hb": "2026-04-23T23:23:48.761Z",
       "notes": null
+    },
+    {
+      "node_id": "sevp-jspoke",
+      "callsign": "SEVP-JSPOKE-JNMBP-01",
+      "role": "spoke",
+      "layer": "Layer 2",
+      "authority": "MAOS-SALES-ENABLEMENT-OPERATOR",
+      "deprecated": false,
+      "mesh_status": "REGISTERED",
+      "registered_at": "2026-04-23T23:19:37.242Z",
+      "last_hb": null,
+      "notes": "Persona agent on JNMBP. Drives MAOS Sales Enablement desk per CMO vote 0167c6eb. Partial-reverse of one-node-per-Nuovo-spoke rule (HUB + em1 grant ref 9d0ef4f2) because SEVP is a distinct persona, not a sub-process."
     }
   ]
 }

@@ -1,6 +1,6 @@
 # COS Mesh Network Topology v2.0 — MASTER REGISTRY
 **Status:** PRODUCTION (promoted 2026-04-23T21:00Z)  
-**Node count:** 11 (10 ACTIVE + 1 DEPRECATED)  
+**Node count:** 12 (11 ACTIVE + 1 DEPRECATED)  
 **Date:** 2026-04-23 (updated as nodes register)  
 **Author:** em1 / COS Prime CONDUCTOR  
 **Supersedes:** SDD `docs/plans/2026-04-10-mesh-coordination-protocol-sdd.md` (architecture sections)  
@@ -71,6 +71,7 @@ LAYER 2 — AGENTS (sessions/processes running ON machines, spoke-role)
 | `cmo` | `ALPINE-CMO-01` | PMBP | Claude Code | CMO | REGISTERED | Heartbeat: session boot/teardown |
 | `codex-cochalet-app` | `CODEX-COCHALET-APP-01` | PMBP (CODEX GPT 5.5) | CODEX | app-layer BUILDER | REGISTERED | Heartbeat: TBD |
 | `codex-local` | `CODEX-LOCAL-PMBP-01` | PMBP (Claude Code) | Claude Code | local BUILDER | REGISTERED | Claude Code session, CoChalet COS scope; key ..494415 |
+| `sevp-jspoke` | `SEVP-JSPOKE-JNMBP-01` | JNMBP | Sales Executive VP persona | MAOS desk operator | REGISTERED | Drives MAOS Sales Enablement desk (first agentized per CMO). Persona agent, not sub-process. Key ..bb8f9c8c |
 
 > **Note:** `jnmbp` and `jmbp` are listed under Layer 1 Machines. They double as agent-session identities — one node per machine for Nuovo spokes (unlike PMBP which hosts multiple distinct agents em1/cmo/codex-*).
 
