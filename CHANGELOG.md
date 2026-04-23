@@ -2,30 +2,35 @@
 
 All notable changes to the COS Prime mesh canon. Follows [semver](https://semver.org/).
 
+## [1.2.0] — 2026-04-23
+
+### Added
+- **`skills/codex-bootup/SKILL.md`** — Unified bootup skill for all CODEX variants (codex-hermes-oncall, codex-cochalet-app, codex-local, plus future CODEX on Nuovo spokes). Covers:
+  - Credential check per variant
+  - Canon refresh from GitHub
+  - Topology v2 assertion
+  - Session UDD callsign generation with role=CODEX and variant-specific prefix
+  - Sender-agnostic inbox rendering contract (same as em1/CMO bootup fix)
+  - 2-layer rollcall to em1 (handshake + per-task status)
+  - Standing orders + failure modes
+
+### Callsign prefixes per variant
+- `CODEX-HERMES-*` for codex-hermes-oncall
+- `CODEX-APP-*` for codex-cochalet-app
+- `CODEX-LOCAL-*` for codex-local
+- `CODEX-JSPOKE-*` for CODEX sessions on JNMBP (uses jnmbp credentials)
+- `CODEX-JMBP-*` for CODEX sessions on JMBP (uses jmbp credentials)
+
 ## [1.1.0] — 2026-04-23
 
 ### Added
-- **STEP 1.5: Canon refresh** added to all bootup skills (Nuovo bootup, Hermes VPS bootup). On every boot, pull fresh `nodes.json` from GitHub and verify own node_id is in the registry.
-- **`scripts/cos-canon-refresh.sh`** — Hourly refresh script for persistent nodes (Hermes VPS). Pulls latest nodes.json + topology, logs drift.
+- STEP 1.5 Canon refresh in Nuovo + Hermes VPS bootup skills
+- `scripts/cos-canon-refresh.sh` for hourly persistent refresh
 
 ### Changed
-- `scripts/cos-hermes-vps-bootup.sh` — Added STEP 1.5 canon refresh block (between auth check and topology assertion)
-- `skills/bootup/SKILL.md` — Added STEP 1.5 canon refresh instructions
-- `skills/hermes-vps-bootup/SKILL.md` — Added STEP 1.5 + updated topology reference from OneDrive path to GitHub URL
+- Bootup skills pull `nodes.json` from GitHub on every boot, verify own node_id in registry
+- Hermes VPS bootup script adds canon refresh between auth and topology assertion
 
 ## [1.0.0] — 2026-04-23 — Initial publish
 
-### Added
-- `COS-MESH-TOPOLOGY-v2.md` master registry (PRODUCTION status)
-- `nodes.json` machine-readable sidecar (schema v1)
-- `README.md` entry point + new-node onboarding guide
-- `skills/bootup/SKILL.md` — Nuovo spoke bootup protocol (JMBP/JNMBP)
-- `skills/hermes-vps-bootup/SKILL.md` — Headless VPS bootup (7-step protocol)
-- `skills/bootdown/SKILL.md` — Session close protocol
-- `scripts/cos-hermes-vps-bootup.sh` — Round 4 tested
-- `scripts/cos-hermes-bootup.service` — systemd oneshot unit
-- `scripts/cos-hub-rollcall.sh`, `cos-jmbp-rollcall.sh`, `cos-jspoke-rollcall.sh`
-- `install/HERMES-VPS-BOOTUP-INSTALL.md`, `JMBP-INSTALL-JMBP-ROLLCALL.md`, `JNMBP-INSTALL-JSPOKE-ROLLCALL.md`
-
-### Node registry at v1.0.0 publish
-- 11 total nodes (10 active, 1 deprecated: `j-spoke`)
+11-node registry, 3 bootup skills (bootup, hermes-vps-bootup, bootdown), scripts, install guides.
