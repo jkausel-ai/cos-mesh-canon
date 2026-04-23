@@ -103,7 +103,7 @@ curl -s -X POST "https://cos-mesh-v2.jkausel.workers.dev/msg" \
   -H "Content-Type: application/json" \
   -H "X-API-Key: <machine-api-key>" \
   -d '{
-    "to_node": "hermes",
+    "to_node": "em1",
     "msg_type": "status",
     "priority": "P2",
     "subject": "ROLLCALL: <node_id> online — <callsign>",
@@ -123,7 +123,7 @@ curl -s -X POST "https://cos-mesh-v2.jkausel.workers.dev/msg" \
   -H "Content-Type: application/json" \
   -H "X-API-Key: <agent-api-key>" \
   -d '{
-    "to_node": "hermes",
+    "to_node": "em1",
     "msg_type": "handshake",
     "priority": "P2",
     "subject": "ROLLCALL: <node_id> session open — UDD: <session-callsign>",
@@ -143,7 +143,7 @@ curl -s -X POST "https://cos-mesh-v2.jkausel.workers.dev/msg" \
   -H "Content-Type: application/json" \
   -H "X-API-Key: <agent-api-key>" \
   -d '{
-    "to_node": "hermes",
+    "to_node": "em1",
     "msg_type": "status",
     "priority": "P2",
     "subject": "TEARDOWN: <node_id> session close — UDD: <session-callsign>",
