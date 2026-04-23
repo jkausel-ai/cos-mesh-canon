@@ -1,0 +1,205 @@
+{
+  "schema_version": "cos-mesh-canon.v1",
+  "generated_at": "2026-04-23T20:58:47Z",
+  "worker_url": "https://cos-mesh-v2.jkausel.workers.dev",
+  "authority_hierarchy": [
+    {
+      "tier": 0,
+      "role": "HUMAN",
+      "holder": "Justin"
+    },
+    {
+      "tier": 1,
+      "role": "CONDUCTOR",
+      "holder": "em1"
+    },
+    {
+      "tier": 2,
+      "role": "EXECUTOR",
+      "holder": "hermes"
+    },
+    {
+      "tier": 3,
+      "role": "BUILDER",
+      "holder": [
+        "codex-hermes-oncall",
+        "codex-cochalet-app",
+        "codex-local"
+      ]
+    },
+    {
+      "tier": 4,
+      "role": "CMO",
+      "holder": "cmo"
+    },
+    {
+      "tier": 99,
+      "role": "INFRA",
+      "holder": [
+        "hub",
+        "macmini",
+        "j-spoke",
+        "jmbp",
+        "jnmbp"
+      ]
+    }
+  ],
+  "routing_canon": {
+    "all_agent_status_heartbeat_consensus": "em1",
+    "marketing_approvals": "cmo",
+    "build_and_infra_work": "codex-hermes-oncall",
+    "machine_to_machine": "FORBIDDEN - route via em1",
+    "nuovo_spokes_may_NOT_route_to": [
+      "macmini",
+      "hub",
+      "other-nuovo"
+    ]
+  },
+  "total_nodes": 11,
+  "active_nodes": [
+    "cmo",
+    "codex-cochalet-app",
+    "codex-hermes-oncall",
+    "codex-local",
+    "em1",
+    "hermes",
+    "hub",
+    "jmbp",
+    "jnmbp",
+    "macmini"
+  ],
+  "nodes": [
+    {
+      "node_id": "cmo",
+      "callsign": "ALPINE-CMO-01",
+      "role": "spoke",
+      "layer": "Layer 2",
+      "authority": "CMO",
+      "deprecated": false,
+      "mesh_status": "DEAD",
+      "registered_at": "2026-04-23T15:58:35.366Z",
+      "last_hb": null,
+      "notes": null
+    },
+    {
+      "node_id": "codex-cochalet-app",
+      "callsign": "CODEX-COCHALET-APP-01",
+      "role": "spoke",
+      "layer": "Layer 2",
+      "authority": "BUILDER",
+      "deprecated": false,
+      "mesh_status": "DEAD",
+      "registered_at": "2026-04-23T16:09:50.804Z",
+      "last_hb": null,
+      "notes": null
+    },
+    {
+      "node_id": "codex-hermes-oncall",
+      "callsign": "CODEX-HERMES-ONCALL-01",
+      "role": "spoke",
+      "layer": "Layer 2",
+      "authority": "BUILDER",
+      "deprecated": false,
+      "mesh_status": "ACTIVE",
+      "registered_at": "2026-04-23T15:58:48.964Z",
+      "last_hb": "2026-04-23T20:58:21.794Z",
+      "notes": null
+    },
+    {
+      "node_id": "codex-local",
+      "callsign": "CODEX-LOCAL-PMBP-01",
+      "role": "spoke",
+      "layer": "Layer 2",
+      "authority": "BUILDER",
+      "deprecated": false,
+      "mesh_status": "STALE",
+      "registered_at": "2026-04-23T20:41:16.009Z",
+      "last_hb": null,
+      "notes": null
+    },
+    {
+      "node_id": "em1",
+      "callsign": "ALPINE-EM1-01",
+      "role": "spoke",
+      "layer": "Layer 2",
+      "authority": "CONDUCTOR",
+      "deprecated": false,
+      "mesh_status": "DEAD",
+      "registered_at": "2026-04-23T15:58:51.271Z",
+      "last_hb": null,
+      "notes": null
+    },
+    {
+      "node_id": "hermes",
+      "callsign": "ALPINE-HERMES-01",
+      "role": "spoke",
+      "layer": "Layer 2",
+      "authority": "EXECUTOR",
+      "deprecated": false,
+      "mesh_status": "ACTIVE",
+      "registered_at": "2026-04-22T02:48:23.561Z",
+      "last_hb": "2026-04-23T20:55:02.087Z",
+      "notes": null
+    },
+    {
+      "node_id": "hub",
+      "callsign": "COS-HUB-01",
+      "role": "hub",
+      "layer": "Layer 1",
+      "authority": "INFRA",
+      "deprecated": false,
+      "mesh_status": "DEAD",
+      "registered_at": "2026-04-23T15:58:48.835Z",
+      "last_hb": null,
+      "notes": null
+    },
+    {
+      "node_id": "j-spoke",
+      "callsign": "COS-JSPOKE-JNMBP-01",
+      "role": "server",
+      "layer": "Layer 1",
+      "authority": "INFRA-DEPRECATED",
+      "deprecated": true,
+      "mesh_status": "DEAD",
+      "registered_at": "2026-04-23T16:09:57.474Z",
+      "last_hb": null,
+      "notes": "Do not use - consolidated into jnmbp 2026-04-23"
+    },
+    {
+      "node_id": "jmbp",
+      "callsign": "EM2-JMBP-NUOVO-01",
+      "role": "spoke",
+      "layer": "Layer 1",
+      "authority": "NUOVO-SPOKE",
+      "deprecated": false,
+      "mesh_status": "DEAD",
+      "registered_at": "2026-04-23T16:49:45.130Z",
+      "last_hb": null,
+      "notes": null
+    },
+    {
+      "node_id": "jnmbp",
+      "callsign": "EM1-JSPOKE-JNMBP-01",
+      "role": "spoke",
+      "layer": "Layer 1",
+      "authority": "NUOVO-SPOKE",
+      "deprecated": false,
+      "mesh_status": "STALE",
+      "registered_at": "2026-04-23T20:19:32.354Z",
+      "last_hb": null,
+      "notes": null
+    },
+    {
+      "node_id": "macmini",
+      "callsign": "GRANITE-CORE-12",
+      "role": "server",
+      "layer": "Layer 1",
+      "authority": "INFRA",
+      "deprecated": false,
+      "mesh_status": "ACTIVE",
+      "registered_at": "2026-03-26T03:49:25.621Z",
+      "last_hb": "2026-04-23T20:56:16.841Z",
+      "notes": null
+    }
+  ]
+}

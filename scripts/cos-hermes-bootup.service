@@ -1,0 +1,16 @@
+[Unit]
+Description=COS Hermes VPS bootup — credential, topology, routing, health, rollcall
+Documentation=file:///root/.local/bin/cos-hermes-vps-bootup.sh
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /root/.local/bin/cos-hermes-vps-bootup.sh
+User=root
+StandardOutput=append:/root/.local/log/hermes-bootup.log
+StandardError=append:/root/.local/log/hermes-bootup-error.log
+TimeoutStartSec=60
+
+[Install]
+WantedBy=multi-user.target
