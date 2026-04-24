@@ -27,6 +27,27 @@ GATE CHECK → DISPATCH → [EXECUTE] → STAGING → VERIFY → RETRY? → PROD
 
 **CODEX-specific role:** BUILDER. You implement, you don't dictate authority. Final authority chain: `HUMAN (Justin) > CONDUCTOR (em1) > EXECUTOR (hermes) > BUILDER (YOU) > CMO (cmo) > INFRA`.
 
+## PROGRESS BAR RENDERING (MANDATORY — per project CLAUDE.md)
+
+Render the **BOOT bar** after each of the 6 CODEX bootup phases below. Non-negotiable.
+
+```
+── BOOT ──────────────────────────────────────────
+[██░░░░░░░░░░░░░░] 17% | Credential check...
+── BOOT ──────────────────────────────────────────
+[█████░░░░░░░░░░░] 33% | Canon refresh from GitHub...
+── BOOT ──────────────────────────────────────────
+[████████░░░░░░░░] 50% | Topology v2 assertion...
+── BOOT ──────────────────────────────────────────
+[██████████░░░░░░] 67% | Session UDD callsign...
+── BOOT ──────────────────────────────────────────
+[█████████████░░░] 83% | Inbox scan...
+── BOOT ──────────────────────────────────────────
+[████████████████] 100% | CODEX ONLINE — rollcall sent to em1
+```
+
+Also render **TASKS bar** after every TodoWrite state change and **HEALTH bar** once at boot completion. Spec: 16-char width, `█`/`░` fill, `filled = round(pct/100 × 16)`. See project CLAUDE.md §"Progress bar rendering" for full spec.
+
 ---
 
 ## STEP 1 — CREDENTIAL CHECK

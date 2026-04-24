@@ -28,6 +28,37 @@ Output is a single file at `~/.claudeos/bootdowns/bootdown-<YYYY-MM-DD>-<topic>.
 
 ---
 
+## PROGRESS BAR RENDERING (MANDATORY — per project CLAUDE.md)
+
+Bootdown is the reverse of bootup. Render the **BOOTDOWN bar** (uses the `BOOT` mode of the `progress` skill, repurposed for close) at each of the 8 phases:
+
+```
+── BOOTDOWN ──────────────────────────────────────
+[██░░░░░░░░░░░░░░] 12% | Canon flush...
+── BOOTDOWN ──────────────────────────────────────
+[████░░░░░░░░░░░░] 25% | Inbox sweep...
+── BOOTDOWN ──────────────────────────────────────
+[██████░░░░░░░░░░] 37% | Teardown ping to em1...
+── BOOTDOWN ──────────────────────────────────────
+[████████░░░░░░░░] 50% | Open-thread capture...
+── BOOTDOWN ──────────────────────────────────────
+[██████████░░░░░░] 62% | PARA daily note...
+── BOOTDOWN ──────────────────────────────────────
+[████████████░░░░] 75% | Mesh sign-off...
+── BOOTDOWN ──────────────────────────────────────
+[██████████████░░] 87% | Bootdown markdown written...
+── BOOTDOWN ──────────────────────────────────────
+[████████████████] 100% | SESSION CLOSED CLEANLY
+```
+
+Also:
+- **TASKS bar** — render final TASKS state after any last TodoWrite (all items completed).
+- **HEALTH bar** — render once at bootdown completion so the next session's /bootup can compare deltas.
+
+See project CLAUDE.md §"Progress bar rendering" for full spec. Rendering is non-negotiable — forgetting it is a canon violation.
+
+---
+
 ## Invocation
 
 **Primary:**
