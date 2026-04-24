@@ -96,6 +96,26 @@ Every piece of public-facing output passes both gates. Reject at GATE, not after
 ### Topology v2 routing
 All agent status / heartbeat / consensus → `em1` (not hub). Nuovo spokes (jmbp, jnmbp) → em1 / hermes / cmo only. Machine-to-machine messaging FORBIDDEN.
 
+### CMD18 host-hardware precedence (CANON, Justin ruling 2026-04-23, ratified 2026-04-24)
+
+**Cross-client isolation precedence rule:**
+
+If a persona agent node is hosted on client-X hardware, client-Y operators (CMO/COORDINATOR/CONDUCTOR) MUST NOT directly broadcast to that persona regardless of its role scope. Cross-client work routes through the persona's own CONDUCTOR/CMO or via explicit hub-mediated handoff.
+
+**Concrete:**
+- `sevp-jspoke` runs on JNMBP hardware (= Nuovo SPOKE). Even though `sevp-jspoke` is a CoChalet MAOS role, it is **Nuovo-tainted** from the CoChalet CMO's perspective and OFF-LIMITS for direct broadcast.
+- CoChalet → Nuovo persona work routes: CoChalet CMO → em1 → hub-mediated handoff → Nuovo CONDUCTOR → Nuovo-hosted persona.
+- Precedence: **CMD18 host-hardware > v1.3.0 persona-node rule** (host wins when in conflict).
+
+**Precedence stack (canonical):**
+1. HUMAN (Justin) — overrides everything
+2. CMD18 cross-client isolation (host-hardware-primary)
+3. Topology v2 two-layer architecture
+4. v1.3.0 persona-node rule (subordinate to #2)
+5. Routing canon (em1 for cross-domain, cmo for marketing, etc.)
+
+Rationale: cross-client data leak / authority confusion is a higher-order concern than architectural cleanliness of "persona = own node".
+
 ---
 
 **Canon source of truth:** `MEMORY.md` (auto-loaded, user-scoped) + this file (auto-loaded, project-scoped) + `cos-mesh-canon` repo (network-scoped).
