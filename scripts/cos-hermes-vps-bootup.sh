@@ -117,12 +117,16 @@ LOAD=$(awk '{print $1,$2,$3}' /proc/loadavg 2>/dev/null | tr -d '\n' || echo "un
 MEM=$(free -h 2>/dev/null | awk '/^Mem:/{print $3 "/" $2}' | tr -d '\n' || echo "unknown")
 DISK=$(df -h / 2>/dev/null | awk 'NR==2{print $5 " used " $4 " free"}' | tr -d '\n' || echo "unknown")
 # pgrep -fc can output count AND exit non-zero — use head/tr to dedupe and strip newlines
-GATEWAY_PIDS=$(pgrep -fc 'hermes gateway' 2>/dev/null | head -1 | tr -d '\n')
+# Pattern broadened to match both 'hermes gateway' (space) and 'hermes-gateway' (hyphen, systemd unit naming)
+# Also check systemctl for the system service (hermes-gateway-hermes.service) per v0.5 corrections 2026-04-24
+GATEWAY_PIDS=$(pgrep -fc -e 'hermes[- ]gateway' 2>/dev/null | head -1 | tr -d '\n')
 GATEWAY_PIDS=${GATEWAY_PIDS:-0}
+# Systemd unit verification (more authoritative than pgrep)
+GATEWAY_UNIT_STATE=$(systemctl is-active hermes-gateway-hermes.service 2>/dev/null || echo "unknown")
 HERMES_PIDS=$(pgrep -fc 'hermes-agent' 2>/dev/null | head -1 | tr -d '\n')
 HERMES_PIDS=${HERMES_PIDS:-0}
 set -o pipefail
-log "STEP 4 ✓ health: load=$LOAD mem=$MEM disk=$DISK gateway_procs=$GATEWAY_PIDS hermes_agent_procs=$HERMES_PIDS"
+log "STEP 4 ✓ health: load=$LOAD mem=$MEM disk=$DISK gateway_procs=$GATEWAY_PIDS (systemd=$GATEWAY_UNIT_STATE) hermes_agent_procs=$HERMES_PIDS"
 log "        uptime: $UPTIME"
 
 # ───── STEP 5: INBOX UNREAD COUNT (defensive — pipefail-safe) ─────
