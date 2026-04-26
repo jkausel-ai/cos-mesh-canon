@@ -1,6 +1,6 @@
 {
   "schema_version": "cos-mesh-canon.v1",
-  "generated_at": "2026-04-23T23:25:03Z",
+  "generated_at": "2026-04-26T18:48:56Z",
   "worker_url": "https://cos-mesh-v2.jkausel.workers.dev",
   "authority_hierarchy": [
     {
@@ -13,6 +13,12 @@
       "role": "CMO",
       "holder": "cmo",
       "scope": "marketing strategy/approval/legal/visual"
+    },
+    {
+      "tier": 1,
+      "role": "CTO",
+      "holder": "cto",
+      "scope": "technical architecture/build plan/engineering quality"
     },
     {
       "tier": 2,
@@ -73,12 +79,13 @@
       "other-nuovo"
     ]
   },
-  "total_nodes": 12,
+  "total_nodes": 13,
   "active_nodes": [
     "cmo",
     "codex-cochalet-app",
     "codex-hermes-oncall",
     "codex-local",
+    "cto",
     "em1",
     "hermes",
     "hub",
@@ -231,6 +238,18 @@
       "registered_at": "2026-04-23T23:19:37.242Z",
       "last_hb": null,
       "notes": "Persona agent on JNMBP. Drives MAOS Sales Enablement desk per CMO vote 0167c6eb. Partial-reverse of one-node-per-Nuovo-spoke rule (HUB + em1 grant ref 9d0ef4f2) because SEVP is a distinct persona, not a sub-process."
+    },
+    {
+      "node_id": "cto",
+      "callsign": "CTO-COCHALET-QUARTZ-BEACON-05",
+      "role": "spoke",
+      "layer": "Layer 2",
+      "authority": "CTO",
+      "deprecated": false,
+      "mesh_status": "ACTIVE",
+      "registered_at": "2026-04-26T18:25:12.206Z",
+      "last_hb": "2026-04-26T18:45:48.861Z",
+      "notes": "Dedicated CTO operating agent on PMBP/cedar chat. Registered and key-rotated by CODEX Hermes on 2026-04-26; direct route test msg 4f0cf78f-a488-4166-8c74-2c01773940da."
     }
   ]
 }
